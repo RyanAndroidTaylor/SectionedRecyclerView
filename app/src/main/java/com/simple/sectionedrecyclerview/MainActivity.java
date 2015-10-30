@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 //        cursorListAdapter.enableFooter();
 //        mRecyclerView.setAdapter(cursorListAdapter);
 
-        listAdapter = new ListAdapter(getIntegerList());
+        listAdapter = new ListAdapter(this, getIntegerList());
         listAdapter.enableFooter();
         mRecyclerView.setAdapter(listAdapter);
 

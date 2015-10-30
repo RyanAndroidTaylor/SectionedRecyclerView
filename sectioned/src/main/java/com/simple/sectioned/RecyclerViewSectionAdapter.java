@@ -21,7 +21,7 @@ package com.simple.sectioned;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-public abstract class RecyclerViewSectionAdapter<VH extends RecyclerView.ViewHolder, T> extends RecyclerView.Adapter<VH> implements SectionAdapter<VH, T>, SectionHandler<VH, T>, FooterHandler<VH> {
+public abstract class RecyclerViewSectionAdapter<VH extends RecyclerView.ViewHolder, T> extends RecyclerView.Adapter<VH> implements SectionAdapter<VH, T>, SectionHandler<VH, T>, FooterHandler<VH>, RecyclerView.OnItemTouchListener {
 
     protected int FOOTER_COUNT = 1;
     protected int NO_ITEMS = 0;
@@ -74,7 +74,7 @@ public abstract class RecyclerViewSectionAdapter<VH extends RecyclerView.ViewHol
         return position == viewTypes.length && footerEnabled;
     }
 
-    public int getSectionOffsetForPosition(int position) {
+    public int getAdjustedPositionForSections(int position) {
         int sections = 0;
 
         for (int i = 0; i < position; i++) {
@@ -82,7 +82,7 @@ public abstract class RecyclerViewSectionAdapter<VH extends RecyclerView.ViewHol
                 sections++;
         }
 
-        return sections;
+        return position - sections;
     }
 
     public void enableFooter() {

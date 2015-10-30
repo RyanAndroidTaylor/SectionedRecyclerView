@@ -2,6 +2,7 @@ package com.simple.sectionedrecyclerview;
 
 import java.util.List;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,8 @@ import com.simple.sectioned.ListRecyclerViewSectionAdapter;
 
 public class ListAdapter extends ListRecyclerViewSectionAdapter<ViewHolder, Integer> {
 
-    public ListAdapter(List<Integer> items) {
-        super(items);
+    public ListAdapter(Context context, List<Integer> items) {
+        super(context, items);
     }
 
     @Override

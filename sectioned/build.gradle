@@ -1,5 +1,29 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'com.simple.sectioned'
+
+    publishedGroupId = 'com.simple.sectionlibrary'
+    libraryName = 'Sectioned'
+    artifact = 'section'
+
+    libraryDescription = 'A library that added sections to RecyclerView'
+
+    siteUrl = ''
+    gitUrl = 'https://github.com/RyanAndroidTaylor/SectionedRecyclerView'
+
+    libraryVersion = '0.0.1'
+
+    developerId = 'ner'
+    developerName = 'Ryan Taylor'
+    developerEmail = 'thewaronryan@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "21.1.2"

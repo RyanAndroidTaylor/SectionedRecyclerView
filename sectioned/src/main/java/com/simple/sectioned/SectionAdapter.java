@@ -32,7 +32,7 @@ public interface SectionAdapter<VH extends RecyclerView.ViewHolder, T> {
      */
     boolean needsSectionBefore(T item);
 
-    int getSectionOffsetForPosition(int position);
+    int getAdjustedPositionForSections(int position);
 
     void enableFooter();
 }

@@ -29,6 +29,10 @@ import java.util.List;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.MotionEvent;
+import android.view.View;
 
 public abstract class CursorRecyclerViewSectionAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerViewSectionAdapter<VH, Cursor> {
 
@@ -39,6 +43,9 @@ public abstract class CursorRecyclerViewSectionAdapter<VH extends RecyclerView.V
     private int rowIdColumn;
 
     private DataSetObserver dataSetObserver;
+
+    protected OnListItemClickedListener listItemClickedListener;
+    protected GestureDetector gestureDetector;
 
     public CursorRecyclerViewSectionAdapter(Cursor cursor) {
         this.cursor = cursor;
@@ -73,10 +80,10 @@ public abstract class CursorRecyclerViewSectionAdapter<VH extends RecyclerView.V
         if (isFooter(position)) {
             onBindFooter(holder);
         } else if (viewTypes[position] == DEFAULT_VIEW_TYPE) {
-            cursor.moveToPosition(position - getSectionOffsetForPosition(position));
+            cursor.moveToPosition(getAdjustedPositionForSections(position));
             onBindViewHolder(holder, cursor);
         } else if (viewTypes[position] == SECTION_VIEW_TYPE) {
-            cursor.moveToPosition(position - getSectionOffsetForPosition(position));
+            cursor.moveToPosition(getAdjustedPositionForSections(position));
             onBindSectionViewHolder(holder, cursor);
         } else {
             throw new IllegalStateException("No view type found for position " + position);
@@ -139,22 +146,63 @@ public abstract class CursorRecyclerViewSectionAdapter<VH extends RecyclerView.V
         return oldCursor;
     }
 
-private class NotifyingDataSetObserver extends DataSetObserver {
-    @Override
-    public void onChanged() {
-        super.onChanged();
-        dataValid = true;
-        notifyDataSetChanged();
-    }
+    private class NotifyingDataSetObserver extends DataSetObserver {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            dataValid = true;
+            notifyDataSetChanged();
+        }
 
-    @Override
-    public void onInvalidated() {
-        super.onInvalidated();
-        dataValid = false;
-        notifyDataSetChanged();
+        @Override
+        public void onInvalidated() {
+            super.onInvalidated();
+            dataValid = false;
+            notifyDataSetChanged();
+        }
     }
-
-}
 
     public abstract void onBindViewHolder(VH viewHolder, Cursor cursor);
+
+    public void setOnListItemClickListener(OnListItemClickedListener listItemClickListener) {
+        this.listItemClickedListener = listItemClickListener;
+    }
+
+    public interface OnListItemClickedListener {
+        void onItemClicked(long itemID);
+    }
+
+    private class SimpleTouchListener extends SimpleOnGestureListener {
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            return true;
+        }
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+        View childView = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+
+        if (listItemClickedListener != null && childView != null && gestureDetector.onTouchEvent(motionEvent)) {
+            int position = recyclerView.getChildLayoutPosition(childView);
+
+            if (isNormalView(position)) {
+                listItemClickedListener.onItemClicked(getItemId(getAdjustedPositionForSections(position)));
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+    }
 }
