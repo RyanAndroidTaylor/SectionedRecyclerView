@@ -17,7 +17,7 @@
  */
 
 
-package com.simple.sectioned;
+package com.deserttowersprogramming.sectioned;
 
 import java.util.ArrayList;
 import java.util.Arrays;

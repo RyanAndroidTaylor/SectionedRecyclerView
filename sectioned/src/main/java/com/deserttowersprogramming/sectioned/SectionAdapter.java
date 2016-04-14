@@ -16,14 +16,23 @@
  *
  */
 
-package com.simple.sectioned;
+package com.deserttowersprogramming.sectioned;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
 
-public interface SectionHandler<VH extends RecyclerView.ViewHolder, T> {
+public interface SectionAdapter<VH extends RecyclerView.ViewHolder, T> {
+    boolean isNormalView(int position);
+    boolean isFooter(int position);
 
-    VH onCreateSectionViewHolder(ViewGroup parent);
+    void setViewTypes();
 
-    void onBindSectionViewHolder(VH viewHolder, T item);
+    /**
+     * @param item The item the section will come before
+     * @return True if a section should be create before this item in the RecyclerView
+     */
+    boolean needsSectionBefore(T item);
+
+    int getAdjustedPositionForSections(int position);
+
+    void enableFooter();
 }

@@ -16,18 +16,14 @@
  *
  */
 
-
-package com.simple.sectioned;
+package com.deserttowersprogramming.sectioned;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-public interface FooterHandler<VH extends RecyclerView.ViewHolder> {
+public interface SectionHandler<VH extends RecyclerView.ViewHolder, T> {
 
-    VH onCreateFooter(ViewGroup parent);
+    VH onCreateSectionViewHolder(ViewGroup parent);
 
-    /**
-     * Use this method if you want to put something in the footer
-     */
-    void onBindFooter(VH viewHolder);
+    void onBindSectionViewHolder(VH viewHolder, T item);
 }

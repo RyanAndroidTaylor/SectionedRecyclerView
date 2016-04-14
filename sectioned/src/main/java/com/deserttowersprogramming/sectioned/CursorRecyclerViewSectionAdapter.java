@@ -19,7 +19,7 @@
  */
 
 
-package com.simple.sectioned;
+package com.deserttowersprogramming.sectioned;
 
 
 import java.util.ArrayList;
@@ -166,6 +166,9 @@ public abstract class CursorRecyclerViewSectionAdapter<VH extends RecyclerView.V
 
     public void setOnListItemClickListener(OnListItemClickedListener listItemClickListener) {
         this.listItemClickedListener = listItemClickListener;
+
+        if (gestureDetector == null)
+            gestureDetector = new GestureDetector(new SimpleTouchListener());
     }
 
     public interface OnListItemClickedListener {

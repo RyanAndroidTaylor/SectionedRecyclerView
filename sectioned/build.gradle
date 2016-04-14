@@ -1,27 +1,13 @@
 apply plugin: 'com.android.library'
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'com.simple.sectioned'
 
-    publishedGroupId = 'com.simple.sectionlibrary'
-    libraryName = 'Sectioned'
-    artifact = 'section'
+    PUBLISH_GROUP_ID = "com.deserttowersprogramming.sectioned"
 
-    libraryDescription = 'A library that added sections to RecyclerView'
+    PUBLISH_ARTIFACT_ID = "sectioned"
 
-    siteUrl = ''
-    gitUrl = 'https://github.com/RyanAndroidTaylor/SectionedRecyclerView'
+    PUBLISH_VERSION = "0.1.0"
 
-    libraryVersion = '0.0.1'
-
-    developerId = 'ner'
-    developerName = 'Ryan Taylor'
-    developerEmail = 'thewaronryan@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
 }
 
 android {
@@ -47,3 +33,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.0'
     compile 'com.android.support:recyclerview-v7:23.0.0'
 }
+
+apply from: "https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle"

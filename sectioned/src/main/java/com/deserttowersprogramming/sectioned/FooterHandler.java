@@ -16,23 +16,18 @@
  *
  */
 
-package com.simple.sectioned;
+
+package com.deserttowersprogramming.sectioned;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
 
-public interface SectionAdapter<VH extends RecyclerView.ViewHolder, T> {
-    boolean isNormalView(int position);
-    boolean isFooter(int position);
+public interface FooterHandler<VH extends RecyclerView.ViewHolder> {
 
-    void setViewTypes();
+    VH onCreateFooter(ViewGroup parent);
 
     /**
-     * @param item The item the section will come before
-     * @return True if a section should be create before this item in the RecyclerView
+     * Use this method if you want to put something in the footer
      */
-    boolean needsSectionBefore(T item);
-
-    int getAdjustedPositionForSections(int position);
-
-    void enableFooter();
+    void onBindFooter(VH viewHolder);
 }

@@ -1,4 +1,4 @@
-package com.simple.sectioned;
+package com.deserttowersprogramming.sectioned;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

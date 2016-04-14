@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.simple.sectioned.CursorRecyclerViewSectionAdapter;
+
+import com.deserttowersprogramming.sectioned.CursorRecyclerViewSectionAdapter;
 import com.simple.sectionedrecyclerview.database.PersonTable;
 
 public class CursorListAdapter extends CursorRecyclerViewSectionAdapter<ViewHolder> {

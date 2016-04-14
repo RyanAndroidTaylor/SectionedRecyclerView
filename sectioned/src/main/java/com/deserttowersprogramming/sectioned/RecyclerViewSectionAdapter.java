@@ -16,7 +16,7 @@
  *
  */
 
-package com.simple.sectioned;
+package com.deserttowersprogramming.sectioned;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
